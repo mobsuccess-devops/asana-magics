@@ -1,0 +1,21 @@
+{
+  "name": "@mobsuccess-devops/asana-magics",
+  "version": "1.0.0",
+  "description": "A list of Asana magic number and strings used by other Mobsuccess repositories",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest",
+    "eslint": "npx eslint",
+    "prettier": "npx prettier -c ."
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.3.0"
+  }
+}
