@@ -1,4 +1,13 @@
 module.exports = {
+  projects: {
+    currentSprint: {
+      gid: "1200175269622723",
+      sections: {
+        toTest: "1200175269622816",
+        ready: "1200175269622817",
+      },
+    },
+  },
   customFields: {
     live: { gid: "1200323257708391" },
     asanaPr: { gid: "1200114403104483" },
