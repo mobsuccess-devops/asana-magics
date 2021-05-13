@@ -12,6 +12,6 @@ Sample usage:
 ```js
 const asanaMagics = require("@mobsuccess-devops/asana-magics");
 
-const gid = asanaMagics.gids.customFields.live;
+const gid = asanaMagics.customFields.live.gid;
 console.log(gid);
 ```
