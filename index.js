@@ -1,3 +1,11 @@
+const projectCurrentSprintSectionGid = {
+  design: "1200175269622814",
+  readyToDo: "1200175269622815",
+  inProgress: "1200175269622840",
+  toTest: "1200175269622816",
+  ready: "1200175269622817",
+};
+
 module.exports = {
   workspaces: {
     mobsuccess: {
@@ -7,9 +15,13 @@ module.exports = {
   projects: {
     currentSprint: {
       gid: "1200175269622723",
-      sections: {
-        toTest: "1200175269622816",
-        ready: "1200175269622817",
+      sections: projectCurrentSprintSectionGid,
+      sectionNames: {
+        [projectCurrentSprintSectionGid.design]: "Design",
+        [projectCurrentSprintSectionGid.readyToDo]: "Ready to do",
+        [projectCurrentSprintSectionGid.inProgress]: "In Progress",
+        [projectCurrentSprintSectionGid.toTest]: "To Test",
+        [projectCurrentSprintSectionGid.ready]: "Ready",
       },
     },
   },
