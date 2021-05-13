@@ -1,4 +1,9 @@
 module.exports = {
+  workspaces: {
+    mobsuccess: {
+      gid: "634223311732610",
+    },
+  },
   projects: {
     currentSprint: {
       gid: "1200175269622723",
