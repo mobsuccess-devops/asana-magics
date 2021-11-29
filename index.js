@@ -19,6 +19,7 @@ module.exports = {
       sections: projectCurrentSprintSectionGid,
       sectionNames: {
         [projectCurrentSprintSectionGid.design]: "Design",
+        [projectCurrentSprintSectionGid.trash]: "Trash",
         [projectCurrentSprintSectionGid.readyToDo]: "Ready to do",
         [projectCurrentSprintSectionGid.inProgress]: "In Progress",
         [projectCurrentSprintSectionGid.toTest]: "To Test",
