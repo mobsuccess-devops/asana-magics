@@ -19,12 +19,12 @@ jobs:
   prettier:
     name: Prettier
     runs-on: ubuntu-20.04
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: ^16.13
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v2
@@ -43,12 +43,12 @@ jobs:
   eslint:
     name: Eslint
     runs-on: ubuntu-20.04
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: ^16.13
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v2
@@ -67,12 +67,12 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-20.04
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: ^16.13
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v2
@@ -88,17 +88,51 @@ jobs:
         working-directory: .
       - run: npm run test
         working-directory: .
-  package:
+  postBuild:
     needs: [packagejsonlint, prettier, eslint, test]
+    name: Post-Build
+    runs-on: ubuntu-20.04
+    timeout-minutes: 2
+    outputs:
+      needsPackage: ${{ steps.checkEligibility.outputs.needsPackage }}
+      pr: ${{ steps.checkEligibility.outputs.pr }}
+      tag: ${{ steps.checkEligibility.outputs.tag }}
+    steps:
+      - name: Check Package Eligibility
+        id: checkEligibility
+        run: |
+          if [[ ${{github.ref}} == "refs/heads/master" ]]; then
+            echo Packaging for master
+            echo "::set-output name=needsPackage::true"
+            echo "::set-output name=tag::latest"
+          else
+            has_label_package=${{ contains(github.event.pull_request.labels.*.name, 'npm-publish') }}
+            if [ "$has_label_package" == true ]; then
+              echo PR has package label
+              pr_number=${{github.event.number}}
+              if [ -z "$pr_number" ]; then
+                pr_number=${{github.event.issue.number}}
+              fi
+              echo "::set-output name=needsPackage::true"
+              echo "::set-output name=pr::$pr_number"
+              echo "::set-output name=tag::pr-$pr_number"
+            else
+              echo PR does not have package label
+              echo "::set-output name=needsPackage::false"
+            fi
+          fi
+
+  package:
+    needs: [postBuild]
     name: Package
     runs-on: ubuntu-20.04
     timeout-minutes: 2
-    if: github.ref == 'refs/heads/master'
+    if: needs.postBuild.outputs.needsPackage == 'true'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: ^16.13
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v2
@@ -112,8 +146,9 @@ jobs:
       - run: npm install
         if: steps.cache.outputs.cache-hit != 'true'
         working-directory: .
-      - run: npm version prerelease --preid=ci-$GITHUB_RUN_ID --no-git-tag-version
-        working-directory: .
+      - run: npm version --no-git-tag-version $(node -e 'x=JSON.parse(require("fs").readFileSync("package.json", {encoding:"utf-8"})).version.split("."); x[2]="'$GITHUB_RUN_ID'"; console.log(x.join("."))' )
+      - run: npm version prerelease --no-git-tag-version --preid=pr-${{needs.postBuild.outputs.pr}}
+        if: github.ref != 'refs/heads/master'
       - run: npm pack
         working-directory: .
       - name: Upload
@@ -123,10 +158,10 @@ jobs:
           path: "*.tgz"
   publish:
     name: "Publish to GitHub Packages"
-    needs: [package]
+    needs: [postBuild, package]
     runs-on: ubuntu-20.04
     timeout-minutes: 2
-    if: github.ref == 'refs/heads/master'
+    if: needs.postBuild.outputs.needsPackage == 'true'
     steps:
       - name: Upload
         uses: actions/download-artifact@v2
@@ -134,11 +169,11 @@ jobs:
           name: package
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: ^16.13
           registry-url: https://npm.pkg.github.com/
           scope: "@mobsuccess-devops"
       - run: echo "registry=https://npm.pkg.github.com/@mobsuccess-devops" >> .npmrc
-      - run: npm publish $(ls *.tgz)
+      - run: npm publish $(ls *.tgz) --tag ${{needs.postBuild.outputs.tag}}
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 # DO NOT EDIT: END
