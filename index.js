@@ -27,7 +27,7 @@ module.exports = {
     },
   },
   customFields: {
-    developer: { gid: "1204053566274832" },
+    developer: { gid: "1204034768535484" },
     pullRequestDescription: { gid: "1204032332257162" },
     live: { gid: "1200323257708391" },
     storybook: { gid: "1201338340578371" },
