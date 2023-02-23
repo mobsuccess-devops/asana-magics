@@ -27,6 +27,8 @@ module.exports = {
     },
   },
   customFields: {
+    developer: { gid: "1204053566274832" },
+    pullRequestDescription: { gid: "1204032332257162" },
     live: { gid: "1200323257708391" },
     storybook: { gid: "1201338340578371" },
     asanaPr: { gid: "1200114403104483" },
