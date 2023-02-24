@@ -36,7 +36,7 @@ module.exports = {
     asanaPrStatus: {
       gid: "1200114505696486",
       values: {
-        isDraft: "1204056047582187",
+        inDraft: "1204056047582187",
         inProgress: "1200114505696487",
         inReview: "1200114505696488",
         approved: "1200114505696489",
