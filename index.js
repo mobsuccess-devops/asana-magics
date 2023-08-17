@@ -35,6 +35,12 @@ module.exports = {
     storybook: { gid: "1201338340578371" },
     asanaPr: { gid: "1200114403104483" },
     chiffrage: { gid: "1203142374140249" },
+    businessUnit: {
+      gid: "1200175269622818",
+      values: {
+        // FIXME wait for the new fields
+      },
+    },
     equipe: {
       gid: "1200245464557615",
       values: {
