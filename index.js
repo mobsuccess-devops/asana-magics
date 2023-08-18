@@ -19,6 +19,7 @@ module.exports = {
       sections: projectCurrentSprintSectionGid,
       sectionNames: {
         [projectCurrentSprintSectionGid.design]: "Design",
+        [projectCurrentSprintSectionGid.trash]: "Trash",
         [projectCurrentSprintSectionGid.readyToDo]: "Ready to do",
         [projectCurrentSprintSectionGid.inProgress]: "In Progress",
         [projectCurrentSprintSectionGid.toTest]: "To Test",
@@ -33,6 +34,39 @@ module.exports = {
     live: { gid: "1200323257708391" },
     storybook: { gid: "1201338340578371" },
     asanaPr: { gid: "1200114403104483" },
+    chiffrage: { gid: "1203142374140249" },
+    businessUnit: {
+      gid: "1200175269622818",
+      values: {
+        // this select may change, query Asana API to get the current values
+      },
+    },
+    equipe: {
+      gid: "1200245464557615",
+      values: {
+        // this select changes too often, query Asana API to get the current values
+      },
+    },
+    changelog: { gid: "1202737996854329" },
+    sujet: {
+      gid: "1201664281152438",
+      values: {
+        // this select changes too often, query Asana API to get the current values
+      },
+    },
+    type: {
+      gid: "1200095461095727",
+      values: {
+        new: "1200095461095728",
+        bug: "1200095461095730",
+        feature: "1200095461095729",
+        run: "1205249905662412",
+        nobug: "1205064580744467",
+        rd: "1205098939059695",
+        improvement: "1205256027909996",
+        cantreproduce: "1205285513773675",
+      },
+    },
     asanaPrStatus: {
       gid: "1200114505696486",
       values: {
