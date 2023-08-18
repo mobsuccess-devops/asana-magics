@@ -38,7 +38,7 @@ module.exports = {
     businessUnit: {
       gid: "1200175269622818",
       values: {
-        // FIXME wait for the new fields
+        // this select may change, query Asana API to get the current values
       },
     },
     equipe: {
