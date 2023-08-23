@@ -35,6 +35,12 @@ module.exports = {
     storybook: { gid: "1201338340578371" },
     asanaPr: { gid: "1200114403104483" },
     chiffrage: { gid: "1203142374140249" },
+    priority: {
+      gid: "1200175269622756",
+      values: {
+        // this select may change, query Asana API to get the current values
+      },
+    },
     businessUnit: {
       gid: "1200175269622818",
       values: {
