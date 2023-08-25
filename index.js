@@ -1,10 +1,11 @@
 const projectCurrentSprintSectionGid = {
-  design: "1200175269622814",
-  trash: "1201438237708782",
+  cancelled: "1203546046432495",
+  pending: "1201940752401910",
   readyToDo: "1200175269622815",
   inProgress: "1200175269622840",
   toTest: "1200175269622816",
   ready: "1200175269622817",
+  trash: "1201438237708782",
 };
 
 module.exports = {
@@ -18,12 +19,14 @@ module.exports = {
       gid: "1200175269622723",
       sections: projectCurrentSprintSectionGid,
       sectionNames: {
-        [projectCurrentSprintSectionGid.design]: "Design",
-        [projectCurrentSprintSectionGid.trash]: "Trash",
+        [projectCurrentSprintSectionGid.cancelled]: "Annulé",
+        [projectCurrentSprintSectionGid.pending]: "Pending",
         [projectCurrentSprintSectionGid.readyToDo]: "Ready to do",
         [projectCurrentSprintSectionGid.inProgress]: "In Progress",
         [projectCurrentSprintSectionGid.toTest]: "To Test",
         [projectCurrentSprintSectionGid.ready]: "Ready",
+        [projectCurrentSprintSectionGid.trash]:
+          "Trash (ticket déclaré non complet)",
       },
     },
   },
