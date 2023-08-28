@@ -1,6 +1,7 @@
 const projectCurrentSprintSectionGid = {
   cancelled: "1203546046432495",
   pending: "1201940752401910",
+  blockedBy: "1205362812350130",
   readyToDo: "1200175269622815",
   inProgress: "1200175269622840",
   toTest: "1200175269622816",
@@ -21,6 +22,7 @@ module.exports = {
       sectionNames: {
         [projectCurrentSprintSectionGid.cancelled]: "Annulé",
         [projectCurrentSprintSectionGid.pending]: "Pending",
+        [projectCurrentSprintSectionGid.blockedBy]: "Blocked By",
         [projectCurrentSprintSectionGid.readyToDo]: "Ready to do",
         [projectCurrentSprintSectionGid.inProgress]: "In Progress",
         [projectCurrentSprintSectionGid.toTest]: "To Test",
@@ -66,14 +68,7 @@ module.exports = {
     type: {
       gid: "1200095461095727",
       values: {
-        new: "1200095461095728",
-        bug: "1200095461095730",
-        feature: "1200095461095729",
-        run: "1205249905662412",
-        nobug: "1205064580744467",
-        rd: "1205098939059695",
-        improvement: "1205256027909996",
-        cantreproduce: "1205285513773675",
+        // this select changes too often, query Asana API to get the current values
       },
     },
     asanaPrStatus: {
